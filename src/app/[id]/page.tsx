@@ -1,7 +1,8 @@
-import Homepage from "@/features/homepage";
+import DetailPage from "@/features/details";
 import React from "react";
 
 const Page = () => {
-  return <Homepage />;
+  return <DetailPage />;
 };
+
 export default Page;
