@@ -5,7 +5,6 @@ const apiClient = axios.create({
   timeout: 14000,
   headers: {
     "Content-Type": "application/json",
-    Authorization: `token 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`,
   },
 });
 
