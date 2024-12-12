@@ -1,6 +1,7 @@
 "use client";
 import ProfileCard from "@/components/user-card";
 import Wrapper from "@/components/wrapper";
+import useClickOutside from "@/hooks/useClickOutSide";
 import useGetUserProfile from "@/services/api/useGetUserProfile";
 import { cn } from "@/utils";
 import {
@@ -12,6 +13,7 @@ import {
 import React, { useEffect, useRef, useState } from "react";
 
 const Homepage = () => {
+  const ref = useRef(null);
   const [searchKey, setSearchKey] = useState<string>("");
   const [enableSearch, setEnableSearch] = useState<boolean>(false);
   const [history, setHistory] = useState<string[]>([]);
@@ -20,19 +22,11 @@ const Homepage = () => {
     data: userProfile,
     refetch,
     isFetching,
-    isError,
   } = useGetUserProfile(searchKey, enableSearch);
   // dsadasdsadsadas
   const inputRef = useRef<HTMLInputElement>(null);
   const oldHistory = localStorage.getItem("history");
-
-  const handleVisibleDropdown = (e: any) => {
-    if (inputRef.current?.contains(e.target)) {
-      return setVisible(true);
-    } else {
-      return setVisible(false);
-    }
-  };
+  useClickOutside(ref, () => setVisible(false));
 
   useEffect(() => {
     if (oldHistory) {
@@ -141,7 +135,7 @@ const Homepage = () => {
             </button>
           </div>
           <div
-            onClick={handleVisibleDropdown}
+            ref={ref}
             className={cn("w-[400px] rounded-lg bg-black/70 shadow-lg", {
               hidden: !visible,
             })}

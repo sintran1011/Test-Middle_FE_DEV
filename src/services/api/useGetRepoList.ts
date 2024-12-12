@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
 import apiClient from "@/agent/apiClient";
-import { IRepo, IUser } from "@/global/types/common.types";
+import { IRepo } from "@/global/types/common.types";
 import { toast } from "react-toastify";
 
 const useGetRepoList = (userName: string) => {
@@ -17,6 +17,7 @@ const useGetRepoList = (userName: string) => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (error: any) {
         // out of limit query
+        console.log(error, "error");
         toast.error("Not found repo");
       }
     },

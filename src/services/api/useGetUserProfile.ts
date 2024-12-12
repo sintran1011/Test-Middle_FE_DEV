@@ -17,6 +17,7 @@ const useGetUserProfile = (userName: string, enabled: boolean) => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (error: any) {
         // out of limit query
+        console.log(error, "error");
         toast.error("Not found user");
       }
     },

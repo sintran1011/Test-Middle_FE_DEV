@@ -17,6 +17,7 @@ const DetailPage = () => {
         toast.success("Copied to clipboard!", { autoClose: 1000 });
       })
       .catch((error) => {
+        console.log(error, "error");
         toast.error("Failed to copy to clipboard. Please try again.");
       });
   };
