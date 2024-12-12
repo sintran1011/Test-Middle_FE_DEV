@@ -16,7 +16,6 @@ interface IColumn {
   title?: string | ReactNode;
   key: string;
   render: (val: any, row: any, index: number) => ReactNode;
-  headerAlign?: string;
   sorter?: (A: any, B: any) => void;
   width?: number | string;
   minWidth?: number;
@@ -53,7 +52,7 @@ const Table = (props: IProps) => {
         accessorKey: col.key,
         header: (
           <p
-            className={`text-${col?.headerAlign} text-grey-1 text-sm font-normal leading-[18px]`}
+            className={`text-grey-1 text-left text-sm font-normal leading-[18px]`}
           >
             {col.title}
           </p>
@@ -69,7 +68,6 @@ const Table = (props: IProps) => {
         size: col?.width,
         maxSize: col?.width,
         minSize: col?.minWidth,
-        headerAlign: col?.headerAlign,
       };
     });
   };
@@ -120,7 +118,7 @@ const Table = (props: IProps) => {
 
   const renderTableBody = () =>
     table.getRowModel().rows.map((row) => (
-      <tr key={row.id}>
+      <tr className="even:bg-gray-100" key={row.id}>
         {row.getVisibleCells().map((cell) => (
           <td
             className={cn("border-grey-2 truncate border-b px-4 py-1 sm:py-3")}
@@ -152,7 +150,7 @@ const Table = (props: IProps) => {
               return (
                 <th
                   className={cn(
-                    "bg-white-100 border-grey-2 border-b border-t px-4 py-2 first:rounded-l-md first:border-l last:rounded-r-md last:border-r",
+                    "bg-blue-500 border-grey-2 border-b border-t px-4 py-2 first:rounded-l-md first:border-l last:rounded-r-md last:border-r",
                     header.column.getCanSort() && "cursor-pointer select-none",
                   )}
                   key={header.id}
@@ -168,7 +166,7 @@ const Table = (props: IProps) => {
                   }
                   style={{ ...width }}
                 >
-                  <div className={cn("center gap-2", align)}>
+                  <div className={cn("center gap-2 text-white", align)}>
                     {header.isPlaceholder
                       ? null
                       : flexRender(
@@ -182,7 +180,7 @@ const Table = (props: IProps) => {
           </tr>
         ))}
       </thead>
-      <tbody>{renderTableBody()}</tbody>
+      <tbody >{renderTableBody()}</tbody>
     </table>
   ) : (
     renderEmptyData()

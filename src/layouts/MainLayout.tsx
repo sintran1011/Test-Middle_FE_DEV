@@ -1,6 +1,9 @@
+"use client";
 import Footer from "@/components/footer";
 import Header from "@/components/header";
 import React, { ReactNode } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+const queryClient = new QueryClient();
 
 interface IProps {
   children: ReactNode;
@@ -8,11 +11,13 @@ interface IProps {
 
 const MainLayout = (props: IProps) => {
   return (
-    <div className="flex-center">
-      <Header />
-      {props.children}
-      <Footer />
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <div>
+        <Header />
+        {props.children}
+        <Footer />
+      </div>
+    </QueryClientProvider>
   );
 };
 
