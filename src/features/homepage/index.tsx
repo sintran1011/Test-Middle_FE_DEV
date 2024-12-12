@@ -25,15 +25,14 @@ const Homepage = () => {
   } = useGetUserProfile(searchKey, enableSearch);
   // dsadasdsadsadas
   const inputRef = useRef<HTMLInputElement>(null);
-  const oldHistory = localStorage.getItem("history");
+
   useClickOutside(ref, () => setVisible(false));
 
   useEffect(() => {
-    if (oldHistory) {
-      const parseHistory = oldHistory ? JSON.parse(oldHistory) : [];
-      setHistory(parseHistory);
-    }
-  }, [oldHistory]);
+    const oldHistory = localStorage.getItem("history");
+    const parseHistory = oldHistory ? JSON.parse(oldHistory) : [];
+    setHistory(parseHistory);
+  }, []);
 
   const handleSearch = async () => {
     setEnableSearch(true);
